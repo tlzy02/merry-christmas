@@ -1,192 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merry Christmas</title>
-    <style>
-        body {
-            margin: 0;
-            background: linear-gradient(to bottom, #001d3d, #003566);
-            font-family: Arial, sans-serif;
-            height: 100vh;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .container {
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      body {
+            height: 100vh;
+            background:
+                radial-gradient(circle at top, #ffffff 0%, #fff3dc 45%, #f3e2b8 100%);
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            overflow: hidden;
+            color: #5a3e36;
         }
 
-        .shooting-star {
+
+        /* ánh sáng nền */
+        .light {
             position: absolute;
-            top: 0;
-            left: -120px;
-            width: 120px;
-            height: 2px;
-            background: url(https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/christmas/shooting-star.png) center center no-repeat;
-            background-size: 100% 100%;
-            transform: rotate(20deg);
-            animation: 10s falling-star 0.2s infinite;
+         
+            background: radial-gradient(circle, rgba(255, 215, 140, .55), transparent 70%);
+            filter: blur(120px);
+            z-index: 0;
         }
+        .light.l1 { top: -200px; left: -200px; }
+        .light.l2 { bottom: -200px; right: -200px; }
 
-        @keyframes falling-star {
-            0% {
-                transform: translate3d(0, 0, 0) rotate(10deg);
-                opacity: 1;
-            }
-
-            25%,
-            100% {
-                transform: translate3d(100vw, 30vh, 0) rotate(10deg);
-                opacity: 0;
-            }
-        }
-
-        .tree {
-            position: absolute;
-            bottom: 10px;
-            width: 50%;
-            max-width: 400px;
-            height: auto;
-            z-index: 1;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translate(calc(-50% + 300px), calc(-50% + 500px)) rotate(180deg);
-                opacity: 0.5;
-            }
-
-            100% {
-                transform: translate(calc(-50% + 500px), calc(-50% + 700px)) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .snow-hill {
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .wish {
-            margin: 0;
+        /* card */
+        .christmas-card {
+            position: relative;
+            background: rgba(255,255,255,.75);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 4rem 2.5rem 3.5rem;
+            box-shadow: 0 40px 90px rgba(0,0,0,.15);
             text-align: center;
-            font-size: 3rem;
-            font-family: Cursive, Arial, sans-serif;
-            color: #fff;
-            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff3333, 0 0 20px #ff6666;
-            animation: sparkle 2s infinite;
-            z-index: 4;
+            overflow: hidden;
         }
 
-        @keyframes sparkle {
+        .christmas-card::before {
+            content:'';
+            position:absolute;
+            inset:14px;
+            border:1.5px solid rgba(181,139,42,.35);
+            border-radius:20px;
+            pointer-events:none;
+        }
 
-            0%,
-            100% {
-                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff3333, 0 0 20px #ff6666;
-                transform: scale(1);
-            }
+        /* dây đèn */
+        .lights {
+            position:absolute;
+            top:18px;
+            left:50%;
+            transform:translateX(-50%);
+            width:80%;
+            height:14px;
+            background:
+                radial-gradient(circle,#d4a73c 4px,transparent 6px) repeat-x;
+            background-size:60px 14px;
+            opacity:.55;
+        }
 
-            50% {
-                text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9900, 0 0 30px #ff6600;
-                transform: scale(1.1);
+        /* halo */
+        .halo {
+            position:absolute;
+            width:320px;
+            height:320px;
+            background:radial-gradient(circle,rgba(255,215,140,.6),transparent 70%);
+            border-radius:50%;
+            left:50%;
+            top:130px;
+            transform:translateX(-50%);
+            z-index:0;
+        }
+
+        /* cây thông */
+        .tree-wrapper {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform .9s cubic-bezier(.22,1,.36,1);
+        }
+
+        .tree-wrapper:hover {
+            transform: scale(1.12);
+        }
+
+        .tree-img {
+            width: 250px;
+            animation: sway 5s ease-in-out infinite;
+            transform-origin: 50% 100%;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,.25));
+        }
+
+        @keyframes sway {
+            0%{transform:rotate(0deg);}
+            20%{transform:rotate(4deg);}
+            50%{transform:rotate(0deg);}
+            80%{transform:rotate(-4deg);}
+            100%{transform:rotate(0deg);}
+        }
+
+        /* chữ */
+        .title {
+            margin-top: 2.2rem;
+            font-size: 1.7rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            color: #7a5a20;
+        }
+
+        .sub {
+            margin-top: .8rem;
+            font-size: .95rem;
+            letter-spacing: 2px;
+            opacity: .85;
+        }
+
+        /* hiệu ứng chuyển trang */
+        body.page-leave .christmas-card {
+            animation: fadeUp .9s cubic-bezier(.22,1,.36,1) forwards;
+        }
+
+        body.page-leave .tree-img {
+            animation: treeZoom .9s cubic-bezier(.22,1,.36,1) forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 0;
+                transform: translateY(-30px) scale(1.05);
             }
         }
 
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
+        @keyframes treeZoom {
+            to {
+                transform: scale(1.4);
+                filter: drop-shadow(0 60px 100px rgba(0,0,0,.45));
+            }
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .tree-img { width: 200px; }
+            .halo { width: 260px; height: 260px; top: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            .tree-img { width: 160px; }
+            .title { font-size: 1.3rem; }
+            .sub { font-size: .8rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="shooting-star"></div>
-        <h1 class="wish"></h1>
-        <img class="tree"
-            src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/christmas/christmasTree.webp"
-            alt="">
-        <img class="snow-hill"
-            src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/christmas/snowyHills.webp"
-            alt="">
+    <div class="light l1"></div>
+    <div class="light l2"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-11">
+
+                <div class="christmas-card">
+                    <div class="lights"></div>
+                    <div class="halo"></div>
+
+                    <div class="tree-wrapper" id="treeBtn">
+                        <img src="caythong.png" class="tree-img" alt="Cây thông Noel">
+                    </div>
+
+                    <div class="title">MERRY CHRISTMAS</div>
+                    <div class="sub">BẤM VÀO CÂY THÔNG ĐI BÉ...</div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <canvas id="snow"></canvas>
     <script>
-        const canvas = document.getElementById("snow");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const snowflakes = [];
-        for (let i = 0; i < 200; i++) {
-            snowflakes.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 3 + 1,
-                speed: Math.random() * 2 + 0.5,
-            });
-        }
-
-        function drawSnowflakes() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            snowflakes.forEach((flake) => {
-                const gradient = ctx.createRadialGradient(
-                    flake.x,
-                    flake.y,
-                    0,
-                    flake.x,
-                    flake.y,
-                    flake.radius
-                );
-                gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-                gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.8)");
-                gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-
-        function updateSnowflakes() {
-            snowflakes.forEach((flake) => {
-                flake.y += flake.speed;
-                if (flake.y > canvas.height) {
-                    flake.y = 0;
-                    flake.x = Math.random() * canvas.width;
-                }
-            });
-        }
-
-        function animate() {
-            drawSnowflakes();
-            updateSnowflakes();
-            requestAnimationFrame(animate);
-        }
-
-        animate();
+        document.getElementById('treeBtn').addEventListener('click', () => {
+            document.body.classList.add('page-leave');
+            setTimeout(() => {
+                window.location.href = 'remake.html';
+            }, 900);
+        });
     </script>
 
 </body>
-
 </html>
