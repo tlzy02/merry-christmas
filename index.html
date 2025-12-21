@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Merry Christmas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- BOOTSTRAP 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-      body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             height: 100vh;
             background:
                 radial-gradient(circle at top, #ffffff 0%, #fff3dc 45%, #f3e2b8 100%);
@@ -21,143 +25,238 @@
             color: #5a3e36;
         }
 
+        /* ===== HIỆU ỨNG CHUYỂN TRANG ===== */
+        body.page-leave .card {
+            animation: cardOut .9s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        body.page-leave .tree {
+            animation: treeFocus .9s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        body.page-leave {
+            animation: bgFade .9s ease forwards;
+        }
+
+        @keyframes cardOut {
+            to {
+                opacity: 0;
+                transform: translateY(-24px) scale(1.05);
+            }
+        }
+
+        @keyframes treeFocus {
+            to {
+                transform: scale(1.35);
+                filter: drop-shadow(0 55px 90px rgba(0, 0, 0, .45));
+            }
+        }
+
+        @keyframes bgFade {
+            to {
+                filter: brightness(1.15);
+            }
+        }
 
         /* ánh sáng nền */
         .light {
             position: absolute;
-         
+           
             background: radial-gradient(circle, rgba(255, 215, 140, .55), transparent 70%);
-            filter: blur(120px);
-            z-index: 0;
+            filter: blur(100px);
         }
-        .light.l1 { top: -200px; left: -200px; }
-        .light.l2 { bottom: -200px; right: -200px; }
+
+        .light.l1 {
+            top: -150px;
+            left: -150px;
+        }
+
+        .light.l2 {
+            bottom: -150px;
+            right: -150px;
+        }
 
         /* card */
-        .christmas-card {
+        .card {
             position: relative;
-            background: rgba(255,255,255,.75);
+            width: 90%;
+            max-width: 520px;
+            background: rgba(255, 255, 255, .7);
             backdrop-filter: blur(10px);
             border-radius: 28px;
-            padding: 4rem 2.5rem 3.5rem;
-            box-shadow: 0 40px 90px rgba(0,0,0,.15);
+            padding: 70px 40px 60px;
+            box-shadow: 0 45px 90px rgba(0, 0, 0, .15);
             text-align: center;
-            overflow: hidden;
         }
 
-        .christmas-card::before {
-            content:'';
-            position:absolute;
-            inset:14px;
-            border:1.5px solid rgba(181,139,42,.35);
-            border-radius:20px;
-            pointer-events:none;
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border: 1.5px solid rgba(181, 139, 42, .35);
+            border-radius: 20px;
+            pointer-events: none;
         }
 
         /* dây đèn */
         .lights {
-            position:absolute;
-            top:18px;
-            left:50%;
-            transform:translateX(-50%);
-            width:80%;
-            height:14px;
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 14px;
             background:
-                radial-gradient(circle,#d4a73c 4px,transparent 6px) repeat-x;
-            background-size:60px 14px;
-            opacity:.55;
+                radial-gradient(circle, #d4a73c 4px, transparent 6px) repeat-x;
+            background-size: 60px 14px;
+            opacity: .6;
         }
 
         /* halo */
         .halo {
-            position:absolute;
-            width:320px;
-            height:320px;
-            background:radial-gradient(circle,rgba(255,215,140,.6),transparent 70%);
-            border-radius:50%;
-            left:50%;
-            top:130px;
-            transform:translateX(-50%);
-            z-index:0;
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(255, 215, 140, .55), transparent 70%);
+            border-radius: 50%;
+            left: 50%;
+            top: 135px;
+            transform: translateX(-50%);
+            z-index: 0;
         }
 
         /* cây thông */
-        .tree-wrapper {
-            position: relative;
-            z-index: 2;
+        .tree-link {
             display: inline-block;
+            position: relative;
+            z-index: 1;
             cursor: pointer;
-            transition: transform .9s cubic-bezier(.22,1,.36,1);
+            transition: transform .8s cubic-bezier(.22, 1, .36, 1);
         }
 
-        .tree-wrapper:hover {
-            transform: scale(1.12);
-        }
-
-        .tree-img {
+        .tree {
             width: 250px;
             animation: sway 5s ease-in-out infinite;
             transform-origin: 50% 100%;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,.25));
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .22));
+        }
+
+        .tree-link:hover {
+            transform: scale(1.1);
         }
 
         @keyframes sway {
-            0%{transform:rotate(0deg);}
-            20%{transform:rotate(4deg);}
-            50%{transform:rotate(0deg);}
-            80%{transform:rotate(-4deg);}
-            100%{transform:rotate(0deg);}
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(4deg); }
+            50% { transform: rotate(0deg); }
+            80% { transform: rotate(-4deg); }
+            100% { transform: rotate(0deg); }
         }
 
         /* chữ */
         .title {
-            margin-top: 2.2rem;
-            font-size: 1.7rem;
+            margin-top: 36px;
+            font-size: 26px;
             letter-spacing: 3px;
             font-weight: 600;
             color: #7a5a20;
         }
 
         .sub {
-            margin-top: .8rem;
-            font-size: .95rem;
+            margin-top: 14px;
+            font-size: 15px;
             letter-spacing: 2px;
             opacity: .85;
         }
 
-        /* hiệu ứng chuyển trang */
-        body.page-leave .christmas-card {
-            animation: fadeUp .9s cubic-bezier(.22,1,.36,1) forwards;
+        /* chấm trang trí */
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d4a73c;
+            opacity: .55;
         }
 
-        body.page-leave .tree-img {
-            animation: treeZoom .9s cubic-bezier(.22,1,.36,1) forwards;
-        }
+        .d1 { top: 60px; left: 70px; }
+        .d2 { top: 90px; right: 90px; }
+        .d3 { bottom: 80px; left: 100px; }
+        .d4 { bottom: 110px; right: 80px; }
 
-        @keyframes fadeUp {
-            to {
-                opacity: 0;
-                transform: translateY(-30px) scale(1.05);
-            }
-        }
+        /* ================= RESPONSIVE ================= */
 
-        @keyframes treeZoom {
-            to {
-                transform: scale(1.4);
-                filter: drop-shadow(0 60px 100px rgba(0,0,0,.45));
-            }
-        }
-
-        /* responsive */
         @media (max-width: 768px) {
-            .tree-img { width: 200px; }
-            .halo { width: 260px; height: 260px; top: 120px; }
+            .card {
+                max-width: 440px;
+                padding: 56px 28px 48px;
+            }
+
+            .tree {
+                width: 210px;
+            }
+
+            .halo {
+                width: 280px;
+                height: 280px;
+                top: 120px;
+            }
+
+            .title {
+                font-size: 22px;
+            }
         }
 
         @media (max-width: 480px) {
-            .tree-img { width: 160px; }
-            .title { font-size: 1.3rem; }
-            .sub { font-size: .8rem; }
+            body {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 44px 20px 40px;
+                border-radius: 22px;
+            }
+
+            .card::before {
+                inset: 10px;
+                border-radius: 16px;
+            }
+
+            .tree {
+                width: 170px;
+            }
+
+            .tree-link:hover {
+                transform: scale(1.05);
+            }
+
+            .halo {
+                width: 220px;
+                height: 220px;
+                top: 105px;
+            }
+
+            .title {
+                font-size: 19px;
+            }
+
+            .sub {
+                font-size: 13px;
+            }
+
+            .dot {
+                display: none;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .tree {
+                width: 150px;
+            }
+
+            .title {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
@@ -167,24 +266,24 @@
     <div class="light l1"></div>
     <div class="light l2"></div>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 col-11">
+    <div class="card">
 
-                <div class="christmas-card">
-                    <div class="lights"></div>
-                    <div class="halo"></div>
+        <div class="lights"></div>
 
-                    <div class="tree-wrapper" id="treeBtn">
-                        <img src="caythong.png" class="tree-img" alt="Cây thông Noel">
-                    </div>
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+        <div class="dot d4"></div>
 
-                    <div class="title">MERRY CHRISTMAS</div>
-                    <div class="sub">BẤM VÀO CÂY THÔNG ĐI BÉ...</div>
-                </div>
+        <div class="halo"></div>
 
-            </div>
+        <div class="tree-link" id="treeBtn">
+            <img src="caythong.png" alt="Cây thông Noel" class="tree">
         </div>
+
+        <div class="title">MERRY CHRISTMAS</div>
+        <div class="sub">BẤM VÀO CÂY THÔNG ĐI BÉ...</div>
+
     </div>
 
     <script>
