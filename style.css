@@ -107,3 +107,27 @@
 
 
 
+ @media (max-width: 480px) {
+            .wrap {}
+
+            .photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .merry-christmas {
+                font-size: 26px;
+            }
+
+            .tree {
+                width: 150px;
+            }
+
+            .santa {
+                width: 160px;
+            }
+
+            .wrap {
+                padding-bottom: 150px;
+            }
+        }
